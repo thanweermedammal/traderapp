@@ -34,8 +34,11 @@ class _NewConsignmentState extends State<NewConsignment> {
   final now = DateTime.now();
 
   List<dynamic> images = [];
+  List details = [];
 
   postShipment() async {
+    String jsonData;
+    jsonData = json.encode(details);
     var response = await http.post(
         Uri.parse(
             'http://185.188.127.100/WaselleApi/api/Shipment/SaveShipment'),
@@ -43,28 +46,12 @@ class _NewConsignmentState extends State<NewConsignment> {
           "Accept": "application/json",
           "content-type": "application/json"
         },
-        body: json.encode([
-          {
-            "ShipperId": widget.loginList.first.shipperId,
-            "BranchId": widget.loginList.first.branchId,
-            "ItemDescription": itemController.text,
-            "RecieverName": firstNameController.text,
-            "RecieverLastName": lastNameController.text,
-            "RecieverAddress1": address1Controller.text,
-            "RecieverAddress2": address2Controller.text,
-            "RecieverCity": cityController.text,
-            "RecieveZip": zipCodeController.text,
-            "RecieverCondactDeatils": contactController.text,
-            "CODAmount": amountController == null ? 0 : amountController.text,
-            "IsCOD": yescheck.toString(),
-            "IsDelete": false.toString(),
-            "Date": '${now.year}-${now.month}-${now.day}',
-          }
-        ]));
+        body: jsonData);
 
     if (response.statusCode == 200) {
       // var data = jsonDecode(response.body);
-      final snackBar = SnackBar(content: Text('Successfully Booked'));
+      final snackBar =
+          SnackBar(content: Text('Successfully Booked ${response.body}'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       Navigator.pushReplacement(
           context,
@@ -183,46 +170,126 @@ class _NewConsignmentState extends State<NewConsignment> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 30,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                // ignore: prefer_const_literals_to_create_immutables
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Divider(
-                        thickness: 2,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
                   Text(
-                    "Destination",
+                    "Order Details",
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.normal,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Divider(
-                        thickness: 2,
-                        color: Colors.black,
+                  Text("Total Orders  : ${details.length}")
+                ],
+              ),
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: details.length,
+                  itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black12,
+                                offset: Offset(1, 1),
+                                blurRadius: 3,
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Name : ${details[index]["RecieverName"]}',
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          details.removeAt(index);
+                                        });
+                                      },
+                                      child: Icon(
+                                        Icons.delete_outline,
+                                        color: Colors.red,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Address : ${details[index]["RecieverAddress1"]}',
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'City : ${details[index]["RecieverCity"]}',
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Zip Code : ${details[index]["RecieveZip"]}',
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Cod Amount : ${details[index]["CODAmount"]}',
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 140,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: HexColor('17aeb4'),
+                      ),
+                      child: Text(
+                        'Add',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color(0xffffffff),
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
-              Text(
-                "Reciever Details",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                ),
+              SizedBox(
+                height: 20,
               ),
               Row(
                 children: [
@@ -472,89 +539,8 @@ class _NewConsignmentState extends State<NewConsignment> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Center(
-                        child: Text(
-                          "Contact details (optional)",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextFormField(
-                        // validator: phoneValidator,
-                        keyboardType: TextInputType.text,
-                        cursorColor: Colors.green,
-                        // controller: _phoneController,
-                        onChanged: (text) {
-                          // mobileNumber = value;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          focusColor: Colors.greenAccent,
-                          // labelStyle: ktext14,
-
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              )),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
               SizedBox(
                 height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Divider(
-                        thickness: 1,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "Consignment Details",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Divider(
-                        thickness: 1,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
               ),
               Row(
                 children: [
@@ -727,6 +713,64 @@ class _NewConsignmentState extends State<NewConsignment> {
                     ),
                   ],
                 ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 140,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          details.add({
+                            "ShipperId": widget.loginList.first.shipperId,
+                            "BranchId": widget.loginList.first.branchId,
+                            "ItemDescription": itemController.text,
+                            "RecieverName": firstNameController.text,
+                            "RecieverLastName": lastNameController.text,
+                            "RecieverAddress1": address1Controller.text,
+                            "RecieverAddress2": address2Controller.text,
+                            "RecieverCity": cityController.text,
+                            "RecieveZip": zipCodeController.text,
+                            "RecieverCondactDeatils": contactController.text,
+                            "CODAmount":
+                                yescheck != true ? 0 : amountController.text,
+                            "IsCOD": yescheck.toString(),
+                            "IsDelete": false.toString(),
+                            "Date": '${now.year}-${now.month}-${now.day}',
+                          });
+                        });
+                        firstNameController.clear();
+                        lastNameController.clear();
+                        address1Controller.clear();
+                        address2Controller.clear();
+                        cityController.clear();
+                        zipCodeController.clear();
+                        contactController.clear();
+                        itemController.clear();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: HexColor('17aeb4'),
+                      ),
+                      child: Text(
+                        'Save',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color(0xffffffff),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 height: 10,
               ),

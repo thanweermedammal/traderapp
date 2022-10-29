@@ -3,7 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 
-Widget pickupCard({@required item, required BuildContext context}) {
+Widget pickupCard(
+    {@required item,
+    required BuildContext context,
+    required driverDetailList,
+    required index}) {
   return Container(
     height: 150,
     width: MediaQuery.of(context).size.width,
@@ -32,7 +36,7 @@ Widget pickupCard({@required item, required BuildContext context}) {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               Text(
-                item.customername,
+                driverDetailList[index].name,
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -56,7 +60,7 @@ Widget pickupCard({@required item, required BuildContext context}) {
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               Text(
-                "USERID : ",
+                "DriverID : ",
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -64,7 +68,7 @@ Widget pickupCard({@required item, required BuildContext context}) {
                 ),
               ),
               Text(
-                item.userid,
+                driverDetailList[index].dId.toString(),
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,

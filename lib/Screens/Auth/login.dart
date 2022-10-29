@@ -4,6 +4,8 @@ import 'dart:convert';
 
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trader_app/Screens/Auth/otp_screen.dart';
 import 'package:trader_app/Screens/home_screen.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   List<Login> loginList = [];
+  bool loading = false;
   login() async {
+    final prefs = await SharedPreferences.getInstance();
     var response = await http.get(Uri.parse(
         'http://185.188.127.100/WaselleApi/api/LoginDetails?UName=${userNameController.text}&Password=${passwordController.text}&UserType=Customer'));
     if (response.statusCode == 200) {
@@ -28,6 +32,8 @@ class _LoginScreenState extends State<LoginScreen> {
       print(response.statusCode);
 
       loginList = List<Login>.from(loginData.map((x) => Login.fromJson(x)));
+      prefs.setString('userName', userNameController.text);
+      prefs.setString('password', passwordController.text);
 
       Navigator.push(
         context,
@@ -39,6 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
       print('wrong password or username');
       final snackBar = SnackBar(content: Text('Wrong Username or Password'));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      setState(() {
+        loading = false;
+      });
     }
   }
 
@@ -147,18 +156,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
+                      setState(() {
+                        loading = true;
+                      });
                       login();
                     },
                     style: ElevatedButton.styleFrom(
                       primary: HexColor('17aeb4'),
                     ),
-                    child: Text(
-                      "LOG IN",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xffffffff),
-                      ),
-                    ),
+                    child: loading == false
+                        ? Text(
+                            "LOG IN",
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Color(0xffffffff),
+                            ),
+                          )
+                        : LoadingIndicator(
+                            indicatorType: Indicator.ballSpinFadeLoader,
+                            colors: const [Colors.white],
+                          ),
                   ),
                 ),
               ),

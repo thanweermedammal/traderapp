@@ -52,10 +52,24 @@ class ReceiptsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  receiptlist[index].txnId.toString(),
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width - 150,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          receiptlist[index].txnId.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -69,10 +83,24 @@ class ReceiptsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  '${receiptlist[index].date!.year.toString()}-${receiptlist[index].date!.month.toString()}-${receiptlist[index].date!.day.toString()}',
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width - 200,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${receiptlist[index].date!.year.toString()}-${receiptlist[index].date!.month.toString()}-${receiptlist[index].date!.day.toString()}',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -86,10 +114,24 @@ class ReceiptsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  '${receiptlist[index].shipperName.toString()}',
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 95,
+                  width: MediaQuery.of(context).size.width - 150,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${receiptlist[index].shipperName.toString()}',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -103,10 +145,24 @@ class ReceiptsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  receiptlist[index].description.toString(),
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 102,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          receiptlist[index].description.toString(),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -121,11 +177,22 @@ class ReceiptsDetail extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 16),
                   )),
                   Expanded(
-                      child: Text(
-                    'OMR ${receiptlist[index].totalAmount.toString()}',
-                    style: TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ))
+                    // flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 42,
+                        width: 67,
+                        decoration: BoxDecoration(color: Colors.grey),
+                        child: Center(
+                            child: Text(
+                          'OMR ${receiptlist[index].totalAmount.toString()}',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        )),
+                      ),
+                    ),
+                  )
                 ],
               )
             ],

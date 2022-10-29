@@ -5,9 +5,7 @@ import 'package:trader_app/provider/provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider<DataProvider>(create: (context) => DataProvider())
-    ], child: MyApp()),
+    MyApp(),
   );
 }
 

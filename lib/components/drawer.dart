@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trader_app/Screens/Auth/login.dart';
 
-Widget drawer(@required loginList) {
+Widget drawer(@required loginList, @required context) {
   return Drawer(
     backgroundColor: HexColor("297899"),
     child: SafeArea(
@@ -323,14 +325,17 @@ Widget drawer(@required loginList) {
                           color: Colors.white,
                         ),
                       ),
-                      // onTap: () {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => MyOrders(),
-                      //     ),
-                      //   );
-                      // },
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        prefs.setString("userName", '');
+                        prefs.setString("password", '');
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                            (route) => false);
+                      },
                     ),
                   ],
                 ),

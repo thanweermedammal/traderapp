@@ -39,7 +39,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _widgetOptions = [
       Home(widget.loginList),
       NewConsignment(widget.loginList),
-      FlashConsignment(),
+      FlashConsignment(
+        loginList: widget.loginList,
+      ),
       Text('Notification',
           style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
     ];
@@ -119,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               )),
         ],
       ),
-      drawer: drawer(widget.loginList),
+      drawer: drawer(widget.loginList, context),
       body: _widgetOptions!.elementAt(_currentIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

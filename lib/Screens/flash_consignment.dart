@@ -1,12 +1,18 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:trader_app/Screens/view_deliveryboys.dart';
+import 'package:trader_app/models/driverdetails.dart';
+import 'package:trader_app/models/login_model.dart';
+import 'package:http/http.dart' as http;
 
 class FlashConsignment extends StatefulWidget {
-  const FlashConsignment({Key? key}) : super(key: key);
+  List<Login> loginList = [];
+  FlashConsignment({Key? key, required this.loginList}) : super(key: key);
 
   @override
   State<FlashConsignment> createState() => _FlashConsignmentState();
@@ -19,6 +25,38 @@ class _FlashConsignmentState extends State<FlashConsignment> {
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  TextEditingController searchController = TextEditingController();
+  List<DriverDetail> driverDetailList = [];
+  GetDriverData() async {
+    var response = await http.get(Uri.parse(
+        'http://185.188.127.100/WaselleApi/api/Driver/GetDriverDetails?BranchId=${widget.loginList.first.branchId}&DriverId=${searchController.text}'));
+    final driverData = jsonDecode(response.body);
+    print(response.statusCode);
+
+    setState(() {
+      driverDetailList = List<DriverDetail>.from(
+          driverData.map((x) => DriverDetail.fromJson(x)));
+    });
+    if (response.statusCode == 200) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => ViewDelivery(
+                    loginList: widget.loginList,
+                    driverDetailList: driverDetailList,
+                  )));
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    GetDriverData();
+    super.initState();
   }
 
   @override
@@ -38,36 +76,36 @@ class _FlashConsignmentState extends State<FlashConsignment> {
         ),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(80),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            child: Container(
-              padding: EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Colors.white,
-                border: Border.all(
-                  color: Colors.green,
-                  width: 2,
+          child: Expanded(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
+              child: TextFormField(
+                // validator: phoneValidator,
+                keyboardType: TextInputType.text,
+                cursorColor: Colors.green,
+                controller: searchController,
+                onChanged: (text) {
+                  // mobileNumber = value;
+                },
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.all(10),
+                  focusColor: Colors.greenAccent,
+                  // labelStyle: ktext14,
+                  labelText: "Search by Driver Id",
+                  labelStyle: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                      )),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  ),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  Text(
-                    'Search by name',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                  Icon(
-                    Icons.search,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                ],
               ),
             ),
           ),
@@ -94,10 +132,7 @@ class _FlashConsignmentState extends State<FlashConsignment> {
             ),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ViewDelivery()),
-                );
+                GetDriverData();
               },
               style: ElevatedButton.styleFrom(
                 primary: HexColor('17aeb4'),

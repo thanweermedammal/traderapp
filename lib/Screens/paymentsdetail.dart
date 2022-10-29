@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:trader_app/models/payment_model.dart';
 
 class PaymentsDetail extends StatelessWidget {
@@ -52,10 +53,24 @@ class PaymentsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  '98678',
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width - 150,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          paymentlist[index].txnId.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -69,10 +84,24 @@ class PaymentsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  '${paymentlist[index].date!.year.toString()}-${paymentlist[index].date!.month.toString()}-${paymentlist[index].date!.day.toString()}',
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 42,
+                  width: MediaQuery.of(context).size.width - 200,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${paymentlist[index].date!.year.toString()}-${paymentlist[index].date!.month.toString()}-${paymentlist[index].date!.day.toString()}',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -86,10 +115,24 @@ class PaymentsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  '${paymentlist[index].shipperName.toString()}',
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 95,
+                  width: MediaQuery.of(context).size.width - 150,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${paymentlist[index].shipperName.toString()}',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -103,10 +146,24 @@ class PaymentsDetail extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
-                child: Text(
-                  paymentlist[index].description.toString(),
-                  style: TextStyle(fontSize: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  height: 102,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          paymentlist[index].description.toString(),
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
@@ -121,11 +178,22 @@ class PaymentsDetail extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 16),
                   )),
                   Expanded(
-                      child: Text(
-                    'OMR ${paymentlist[index].totalAmount.toString()}',
-                    style: TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ))
+                    // flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 42,
+                        width: 67,
+                        decoration: BoxDecoration(color: Colors.grey),
+                        child: Center(
+                            child: Text(
+                          'OMR ${paymentlist[index].totalAmount.toString()}',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          textAlign: TextAlign.center,
+                        )),
+                      ),
+                    ),
+                  )
                 ],
               )
             ],
