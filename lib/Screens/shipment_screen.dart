@@ -52,7 +52,7 @@ class _ShipmetScreenState extends State<ShipmetScreen>
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(130),
+          preferredSize: Size.fromHeight(70),
           child: Column(
             children: [
               Padding(
@@ -104,62 +104,63 @@ class _ShipmetScreenState extends State<ShipmetScreen>
                   ],
                 ),
               ),
-              TabBar(
-                  controller: tabController,
-                  indicator: BoxDecoration(
-                    color: Color.fromARGB(255, 179, 233, 181),
-                  ),
-                  indicatorWeight: 5,
-                  indicatorSize: TabBarIndicatorSize.tab,
-                  labelColor: Colors.black,
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        'All',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'Under Review',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'On Going',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'Cancelled',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                  ])
+              // TabBar(
+              //     controller: tabController,
+              //     indicator: BoxDecoration(
+              //       color: Color.fromARGB(255, 179, 233, 181),
+              //     ),
+              //     indicatorWeight: 5,
+              //     indicatorSize: TabBarIndicatorSize.tab,
+              //     labelColor: Colors.black,
+              //     tabs: [
+              //       Tab(
+              //         child: Text(
+              //           'All',
+              //           style: TextStyle(
+              //               color: Colors.black,
+              //               fontSize: 12,
+              //               fontWeight: FontWeight.normal),
+              //         ),
+              //       ),
+              //       Tab(
+              //         child: Text(
+              //           'Under Review',
+              //           style: TextStyle(
+              //               color: Colors.black,
+              //               fontSize: 12,
+              //               fontWeight: FontWeight.normal),
+              //         ),
+              //       ),
+              //       Tab(
+              //         child: Text(
+              //           'On Going',
+              //           style: TextStyle(
+              //               color: Colors.black,
+              //               fontSize: 12,
+              //               fontWeight: FontWeight.normal),
+              //         ),
+              //       ),
+              //       Tab(
+              //         child: Text(
+              //           'Cancelled',
+              //           style: TextStyle(
+              //               color: Colors.black,
+              //               fontSize: 12,
+              //               fontWeight: FontWeight.normal),
+              //         ),
+              //       ),
+              //     ])
             ],
           ),
         ),
       ),
-      body: TabBarView(controller: tabController, children: [
-        ShipmentData(widget.loginList),
-        ShipmentData(widget.loginList),
-        ShipmentData(widget.loginList),
-        ShipmentData(widget.loginList),
-      ]),
+      // body: TabBarView(controller: tabController, children: [
+      //   ShipmentData(widget.loginList),
+      //   ShipmentData(widget.loginList),
+      //   ShipmentData(widget.loginList),
+      //   ShipmentData(widget.loginList),
+      // ]),
+      body: ShipmentData(widget.loginList),
     );
   }
 }

@@ -39,61 +39,117 @@ class Detail extends StatelessWidget {
               ),
               Text(
                 'Order Id /Shipment Id ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
-              Text('${item.shipmentId.toString()}'),
+              Container(
+                  width: double.infinity,
+                  height: 35,
+                  color: Colors.grey.shade200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${item.shipmentId.toString()}'),
+                  )),
               SizedBox(
                 height: 10,
               ),
               Text(
                 'Branch Id',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
-              Text('${item.branchId.toString()}'),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Branch Id',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
+              Container(
+                  width: double.infinity,
+                  height: 35,
+                  color: Colors.grey.shade200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${item.branchId.toString()}'),
+                  )),
+
               SizedBox(
                 height: 10,
               ),
               Text(
                 'Item',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
-              Text('${item.itemDescription.toString()}'),
+              Container(
+                  width: double.infinity,
+                  height: 35,
+                  color: Colors.grey.shade200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${item.itemDescription.toString()}'),
+                  )),
               SizedBox(
                 height: 10,
               ),
               Text(
                 'Status ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
-              Text('${item.status.toString()}'),
+              Container(
+                  width: double.infinity,
+                  height: 35,
+                  color: Colors.grey.shade200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${item.status.toString()}'),
+                  )),
               SizedBox(
                 height: 10,
               ),
               Text(
                 'From Adress ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
-              Text(
-                  '${loginList.first.name}\n${loginList.first.address}\n${loginList.first.city}'
-                  ' , '
-                  '${loginList.first.country}\npin :${loginList.first.zipCode}\nContact Number: ${loginList.first.mobile}'),
+              Container(
+                width: double.infinity,
+                // height: 35,
+                color: Colors.grey.shade200,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                      '${loginList.first.name}\n${loginList.first.address}\n${loginList.first.city}'
+                      ' , '
+                      '${loginList.first.country}\npin :${loginList.first.zipCode}\nContact Number: ${loginList.first.mobile}'),
+                ),
+              ),
               SizedBox(
                 height: 10,
               ),
               Text(
                 'Delivered To ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
-              Text('${item.recieverName.toString()}'
-                  ' '
-                  '${item.recieverLastName.toString()}\n${item.recieverAddress1.toString()}\n${item.recieverCity.toString()}\npin :${item.recieveZip.toString()}\nContact Number: ${item.recieverCondactDeatils.toString()}'),
+              Container(
+                width: double.infinity,
+                // height: 35,
+                color: Colors.grey.shade200,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('${item.recieverName.toString()}'
+                      ' '
+                      '${item.recieverLastName.toString()}\n${item.recieverAddress1.toString()}\n${item.recieverCity.toString()}\npin :${item.recieveZip.toString()}\nContact Number: ${item.recieverCondactDeatils.toString()}'),
+                ),
+              ),
               // SizedBox(
               //   height: 10,
               // ),
@@ -115,25 +171,20 @@ class Detail extends StatelessWidget {
               ),
               Text(
                 'Reciever city  ',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
               ),
-              Text('${item.recieverCity.toString()} '),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // Text(
-              //   'Reciever Zip  ',
-              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              // ),
-              // Text('${item.recieveZip.toString()} '),
-              // SizedBox(
-              //   height: 10,
-              // ),
-              // Text(
-              //   'Reciever ContactDetails  ',
-              //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              // ),
-              Text('${item.recieverCondactDeatils.toString()} '),
+              Container(
+                  width: double.infinity,
+                  // height: 35,
+                  color: Colors.grey.shade200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('${item.recieverCity.toString()} '),
+                  )),
+
               SizedBox(height: 20),
               QrImage(
                 data:

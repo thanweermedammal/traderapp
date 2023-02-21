@@ -31,6 +31,7 @@ class _NewConsignmentState extends State<NewConsignment> {
   TextEditingController amountController = TextEditingController();
   bool yescheck = true;
   bool nocheck = false;
+  bool partialcheck = false;
   final now = DateTime.now();
 
   List<dynamic> images = [];
@@ -78,112 +79,6 @@ class _NewConsignmentState extends State<NewConsignment> {
             children: [
               SizedBox(
                 height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  Text(
-                    "From Address",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: Colors.white,
-                      border: Border.all(
-                        color: Colors.green,
-                        width: 2,
-                      ),
-                    ),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Text(
-                          "Change",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                '${widget.loginList.first.name}',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "${widget.loginList.first.address}",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                "${widget.loginList.first.city} ",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Row(
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  Text(
-                    "Pin: ${widget.loginList.first.zipCode}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Mob: ${widget.loginList.first.mobile}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Order Details",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Text("Total Orders  : ${details.length}")
-                ],
               ),
               ListView.builder(
                   shrinkWrap: true,
@@ -261,35 +156,31 @@ class _NewConsignmentState extends State<NewConsignment> {
               SizedBox(
                 height: 20,
               ),
+              Text(
+                "Reciever Info",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    height: 40,
-                    width: 140,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: HexColor('17aeb4'),
-                      ),
-                      child: Text(
-                        'Add',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color(0xffffffff),
-                        ),
-                      ),
-                    ),
-                  ),
+                  Text(
+                    "Total Orders  : ${details.length}",
+                    style: TextStyle(color: Colors.grey),
+                  )
                 ],
               ),
               SizedBox(
                 height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "First Name",
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
               Row(
                 children: [
@@ -298,6 +189,7 @@ class _NewConsignmentState extends State<NewConsignment> {
                       padding: const EdgeInsets.all(5.0),
                       child: TextFormField(
                         // validator: phoneValidator,
+
                         keyboardType: TextInputType.text,
                         cursorColor: Colors.green,
                         controller: firstNameController,
@@ -308,41 +200,7 @@ class _NewConsignmentState extends State<NewConsignment> {
                           contentPadding: EdgeInsets.all(10),
                           focusColor: Colors.greenAccent,
                           // labelStyle: ktext14,
-                          labelText: "First Name",
-                          labelStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              )),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextFormField(
-                        // validator: phoneValidator,
-                        keyboardType: TextInputType.text,
-                        cursorColor: Colors.green,
-                        controller: lastNameController,
-                        onChanged: (text) {
-                          // mobileNumber = value;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          focusColor: Colors.greenAccent,
-                          // labelStyle: ktext14,
-                          labelText: "Last Name",
+                          // labelText: "First Name",
                           labelStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 12,
@@ -365,6 +223,58 @@ class _NewConsignmentState extends State<NewConsignment> {
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "Last Name",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextFormField(
+                        // validator: phoneValidator,
+                        keyboardType: TextInputType.text,
+                        cursorColor: Colors.green,
+                        controller: lastNameController,
+                        onChanged: (text) {
+                          // mobileNumber = value;
+                        },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.all(10),
+                          focusColor: Colors.greenAccent,
+                          // labelStyle: ktext14,
+                          // labelText: "Last Name",
+                          labelStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(
+                                color: Colors.black,
+                              )),
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "Address",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
                 child: TextFormField(
                   // validator: phoneValidator,
                   keyboardType: TextInputType.text,
@@ -377,7 +287,7 @@ class _NewConsignmentState extends State<NewConsignment> {
                     contentPadding: EdgeInsets.all(10),
                     focusColor: Colors.greenAccent,
                     // labelStyle: ktext14,
-                    labelText: "Address Line1",
+                    // labelText: "Address Line1",
                     labelStyle: TextStyle(
                       color: Colors.grey,
                       fontSize: 12,
@@ -396,111 +306,127 @@ class _NewConsignmentState extends State<NewConsignment> {
               Row(
                 children: [
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextFormField(
-                        // validator: phoneValidator,
-                        keyboardType: TextInputType.text,
-                        cursorColor: Colors.green,
-                        controller: address2Controller,
-                        onChanged: (text) {
-                          // mobileNumber = value;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          focusColor: Colors.greenAccent,
-                          // labelStyle: ktext14,
-                          labelText: "Address Line2",
-                          labelStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              )),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            "ZipCode",
+                            style: TextStyle(color: Colors.grey),
                           ),
                         ),
-                      ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextFormField(
+                                  // validator: phoneValidator,
+                                  keyboardType: TextInputType.text,
+                                  cursorColor: Colors.green,
+                                  controller: zipCodeController,
+                                  onChanged: (text) {
+                                    // mobileNumber = value;
+                                  },
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(10),
+                                    focusColor: Colors.greenAccent,
+                                    // labelStyle: ktext14,
+                                    // labelText: "Zip Code",
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide: BorderSide(
+                                          color: Colors.black,
+                                        )),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    width: 150,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextFormField(
-                        // validator: phoneValidator,
-                        keyboardType: TextInputType.text,
-                        cursorColor: Colors.green,
-                        controller: cityController,
-                        onChanged: (text) {
-                          // mobileNumber = value;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          focusColor: Colors.greenAccent,
-                          // labelStyle: ktext14,
-                          labelText: "City",
-                          labelStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              )),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Text(
+                            "City",
+                            style: TextStyle(color: Colors.grey),
                           ),
                         ),
-                      ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: TextFormField(
+                                  // validator: phoneValidator,
+                                  keyboardType: TextInputType.text,
+                                  cursorColor: Colors.green,
+                                  controller: cityController,
+                                  onChanged: (text) {
+                                    // mobileNumber = value;
+                                  },
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.all(10),
+                                    focusColor: Colors.greenAccent,
+                                    // labelStyle: ktext14,
+                                    // labelText: "City",
+                                    labelStyle: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        borderSide: BorderSide(
+                                          color: Colors.black,
+                                        )),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "Contact Number",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
               Row(
                 children: [
-                  SizedBox(
-                    width: 150,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TextFormField(
-                        // validator: phoneValidator,
-                        keyboardType: TextInputType.text,
-                        cursorColor: Colors.green,
-                        controller: zipCodeController,
-                        onChanged: (text) {
-                          // mobileNumber = value;
-                        },
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(10),
-                          focusColor: Colors.greenAccent,
-                          // labelStyle: ktext14,
-                          labelText: "Zip Code",
-                          labelStyle: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)),
-                              borderSide: BorderSide(
-                                color: Colors.black,
-                              )),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
-                          ),
-                        ),
-                      ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    color: HexColor('17aeb4'),
+                    child: Icon(
+                      Icons.phone_enabled_outlined,
+                      color: Colors.white,
                     ),
                   ),
                   Expanded(
@@ -518,7 +444,7 @@ class _NewConsignmentState extends State<NewConsignment> {
                           contentPadding: EdgeInsets.all(10),
                           focusColor: Colors.greenAccent,
                           // labelStyle: ktext14,
-                          labelText: "Contact Details (mandatory)",
+                          // labelText: "Contact Details (mandatory)",
                           labelStyle: TextStyle(
                             color: Colors.grey,
                             fontSize: 12,
@@ -539,24 +465,22 @@ class _NewConsignmentState extends State<NewConsignment> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
+              Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  "Alternative Number",
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
               Row(
                 children: [
-                  SizedBox(
-                    width: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Center(
-                        child: Text(
-                          "What are you sending?",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    color: HexColor('17aeb4'),
+                    child: Icon(
+                      Icons.phone_enabled_outlined,
+                      color: Colors.white,
                     ),
                   ),
                   Expanded(
@@ -566,7 +490,7 @@ class _NewConsignmentState extends State<NewConsignment> {
                         // validator: phoneValidator,
                         keyboardType: TextInputType.text,
                         cursorColor: Colors.green,
-                        controller: itemController,
+                        // controller: _phoneController,
                         onChanged: (text) {
                           // mobileNumber = value;
                         },
@@ -593,29 +517,25 @@ class _NewConsignmentState extends State<NewConsignment> {
               ),
               Row(
                 children: [
-                  SizedBox(
-                    width: 200,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Center(
-                        child: Text(
-                          "Is this Consignment COD?",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   Expanded(
                     child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            SizedBox(
+                              width: 10,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Text(
+                                  "COD",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                                 Checkbox(
                                   value: yescheck,
                                   onChanged: (bool? newvalue) {
@@ -623,21 +543,22 @@ class _NewConsignmentState extends State<NewConsignment> {
                                       yescheck = true;
                                       if (yescheck == true) {
                                         nocheck = false;
+                                        partialcheck = false;
                                       }
                                     });
                                   },
-                                ),
-                                Text(
-                                  "Yes",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                  ),
                                 ),
                               ],
                             ),
                             Row(
                               children: [
+                                Text(
+                                  "Paid",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                                 Checkbox(
                                   value: nocheck,
                                   onChanged: (bool? newvalue) {
@@ -645,18 +566,38 @@ class _NewConsignmentState extends State<NewConsignment> {
                                       nocheck = true;
                                       if (nocheck == true) {
                                         yescheck = false;
+                                        partialcheck = false;
                                       }
                                     });
                                   },
                                 ),
+                              ],
+                            ),
+                            Row(
+                              children: [
                                 Text(
-                                  "No",
+                                  "Partial",
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
+                                Checkbox(
+                                  value: partialcheck,
+                                  onChanged: (bool? newvalue) {
+                                    setState(() {
+                                      partialcheck = true;
+                                      if (partialcheck == true) {
+                                        yescheck = false;
+                                        nocheck = false;
+                                      }
+                                    });
+                                  },
+                                ),
                               ],
+                            ),
+                            SizedBox(
+                              width: 10,
                             ),
                           ],
                         )),
@@ -672,11 +613,11 @@ class _NewConsignmentState extends State<NewConsignment> {
                         padding: const EdgeInsets.all(5.0),
                         child: Center(
                           child: Text(
-                            "COD Amount",
+                            "Amount ( OMR )",
                             style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey),
                           ),
                         ),
                       ),
@@ -713,6 +654,9 @@ class _NewConsignmentState extends State<NewConsignment> {
                     ),
                   ],
                 ),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

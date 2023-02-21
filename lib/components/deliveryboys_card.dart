@@ -39,7 +39,7 @@ Widget pickupCard(
                 driverDetailList[index].name,
                 style: TextStyle(
                   fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w500,
                   color: Colors.black,
                 ),
               ),
@@ -60,10 +60,10 @@ Widget pickupCard(
             // ignore: prefer_const_literals_to_create_immutables
             children: [
               Text(
-                "DriverID : ",
+                "Driver ID : ",
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  // fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
@@ -71,7 +71,7 @@ Widget pickupCard(
                 driverDetailList[index].dId.toString(),
                 style: TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                  // fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),

@@ -76,7 +76,7 @@ Widget drawer(@required loginList, @required context) {
                           ),
                         ),
                         Text(
-                          "123456",
+                          "${loginList.first.shipperId}",
                           style: TextStyle(
                             color: Colors.white,
                           ),

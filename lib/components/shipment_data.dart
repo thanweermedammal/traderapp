@@ -41,12 +41,13 @@ class _ShipmentDataState extends State<ShipmentData>
         itemCount: allShipmentController.allshipmentList!.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
             child: allShipmentsCard(
                 context: context,
-                allshipmentController: allShipmentController,
+                // allshipmentController: allShipmentController,
                 index: index,
-                loginList: widget.loginList),
+                loginList: widget.loginList,
+                item: allShipmentController.allshipmentList![index]),
           );
         },
       ),
